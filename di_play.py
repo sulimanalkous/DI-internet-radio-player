@@ -19,6 +19,14 @@ for song in json_object:
     name = song['name']
     stations.append([name, playlist, key])
 
+
+# sort list by name
+def getKey(item):
+    return item[0]
+
+stations = sorted(stations, key=getKey)
+
+
 def print_table(lst):
     table = ''
     half = len(lst) / 2
@@ -42,8 +50,8 @@ while True:
     else:
         try:
             val = int(num)
-            print(stations[val][0])
-            url = "http://pub1.diforfree.org:8000/di_{}_hi".format(stations[val][2])
+            print(stations[val-1][0])
+            url = "http://pub1.diforfree.org:8000/di_{}_hi".format(stations[val-1][2])
             call("mplayer " + url, shell=True )
 
             # reset index
